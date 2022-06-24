@@ -247,7 +247,10 @@ gclid = readCookie("gclid");
 utm_campaign = readCookie("utmCampaign");
 utm_term = readCookie("utmTerm");
 utm_content = readCookie("utmContent");
-userAgent = window.navigator.userAgent
+client_user_agent = window.navigator.userAgent
+
+
+
 
 
 try {
@@ -264,7 +267,8 @@ try {
     document.getElementById("utm_campaign").value = utm_campaign;
     document.getElementById("utm_term").value = utm_term;
     document.getElementById("utm_content").value = utm_content;
-    document.getElementById("userAgent").value = userAgent;
+    document.getElementById("client_user_agent").value = client_user_agent;
+    document.getElementById("client_ip_address").value = client_ip_address;
 } catch {
     console.log('Faltam campos no formulário campos para outras infos do script traktor.js');
 }
@@ -277,4 +281,14 @@ window.onload = function() {
     } catch {
         console.log('Falta campo analyticsClientId do script traktor.js');
     };
+
+    // Add "https://ipinfo.io" statement
+    // this will communicate with the ipify servers
+    // in order to retrieve the IP address
+    $.get("https://ipinfo.io", function(response) {
+        // alert(response.ip);
+        client_ip_address = response.ip
+    }, "json")
+
+    // "json" shows that data will be fetched in json format
 };
