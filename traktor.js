@@ -247,6 +247,7 @@ gclid = readCookie("gclid");
 utm_campaign = readCookie("utmCampaign");
 utm_term = readCookie("utmTerm");
 utm_content = readCookie("utmContent");
+userAgent = window.navigator.userAgent
 
 
 try {
@@ -254,7 +255,7 @@ try {
     document.getElementById("firstSourceAttribution").value = firstSourceAttribution;
     document.getElementById("multiSourceAttribution").value = multiSourceAttribution;
 } catch {
-    console.log('Falta campos para atribuição do script traktor.js');
+    console.log('Faltam campos no formulário para atribuição do script traktor.js');
 
 }
 try {
@@ -263,8 +264,9 @@ try {
     document.getElementById("utm_campaign").value = utm_campaign;
     document.getElementById("utm_term").value = utm_term;
     document.getElementById("utm_content").value = utm_content;
+    document.getElementById("userAgent").value = userAgent;
 } catch {
-    console.log('Falta campos para outras infos do script traktor.js');
+    console.log('Faltam campos no formulário campos para outras infos do script traktor.js');
 }
 
 window.onload = function() {
