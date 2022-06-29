@@ -282,13 +282,9 @@ window.onload = function() {
         console.log('Falta campo analyticsClientId do script traktor.js');
     };
 
-    // Add "https://ipinfo.io" statement
-    // this will communicate with the ipify servers
-    // in order to retrieve the IP address
-    $.get("https://ipinfo.io", function(response) {
-        // alert(response.ip);
-        client_ip_address = response.ip
-    }, "json")
-
-    // "json" shows that data will be fetched in json format
+    fetch('https://ipinfo.io/json', { method: 'GET', mode: 'cors' })
+        .then((response) => response.json())
+        .then((data) => {
+            client_ip_address = data.ip;
+    })
 };
