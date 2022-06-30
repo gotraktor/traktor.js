@@ -70,7 +70,6 @@ let utm_medium = getQueryParam("utm_medium");
 let utm_campaign = getQueryParam("utm_campaign");
 let utm_term = getQueryParam("utm_term");
 let utm_content = getQueryParam("utm_content");
-
 let gclid = getQueryParam("gclid");
 let fbclid = getQueryParam("fbclid");
 
@@ -233,8 +232,10 @@ if (utm_medium !== null && utm_medium !== "") {
 clearCookie("lastSourceAttribution");
 clearCookie("firstSourceAttribution");
 clearCookie("multiSourceAttribution");
-clearCookie("fbclid");
-clearCookie("gclid");
+
+
+clearCookie("utmSource");
+clearCookie("utmMedium");
 clearCookie("utmCampaign");
 clearCookie("utmTerm");
 clearCookie("utmContent");
@@ -242,36 +243,21 @@ clearCookie("utmContent");
 lastSourceAttribution = readCookie("lastSourceAttribution");
 firstSourceAttribution = readCookie("firstSourceAttribution");
 multiSourceAttribution = readCookie("multiSourceAttribution");
-fbclid = readCookie("fbclid");
-gclid = readCookie("gclid");
+
+clearCookie("_fbc");
+fbclid = readCookie("_fbc");
+
+clearCookie("gclidStored");
+gclid = readCookie("gclidStored");
+
+utm_source = readCookie("utmSource");
+utm_medium = readCookie("utmMedium");
 utm_campaign = readCookie("utmCampaign");
 utm_term = readCookie("utmTerm");
 utm_content = readCookie("utmContent");
 client_user_agent = window.navigator.userAgent
 
 
-
-
-
-try {
-    document.getElementById("lastSourceAttribution").value = lastSourceAttribution;
-    document.getElementById("firstSourceAttribution").value = firstSourceAttribution;
-    document.getElementById("multiSourceAttribution").value = multiSourceAttribution;
-} catch {
-    console.log('Faltam campos no formulário para atribuição do script traktor.js');
-
-}
-try {
-    document.getElementById("fbclid").value = fbclid;
-    document.getElementById("gclid").value = gclid;
-    document.getElementById("utm_campaign").value = utm_campaign;
-    document.getElementById("utm_term").value = utm_term;
-    document.getElementById("utm_content").value = utm_content;
-    document.getElementById("client_user_agent").value = client_user_agent;
-    document.getElementById("client_ip_address").value = client_ip_address;
-} catch {
-    console.log('Faltam campos no formulário campos para outras infos do script traktor.js');
-}
 
 window.onload = function() {
     ga("require", "getClientId");
@@ -282,13 +268,42 @@ window.onload = function() {
         console.log('Falta campo analyticsClientId do script traktor.js');
     };
 
-    // Add "https://ipinfo.io" statement
-    // this will communicate with the ipify servers
-    // in order to retrieve the IP address
-    $.get("https://ipinfo.io", function(response) {
-        // alert(response.ip);
-        client_ip_address = response.ip
-    }, "json")
+    //IP Adress
+    fetch('https://ipinfo.io/json', { method: 'GET', mode: 'cors' })
+        .then((response) => response.json())
+        .then((data) => {
+            client_ip_address = data.ip;
+            document.getElementById("client_ip_address").value = client_ip_address;
+        })
 
-    // "json" shows that data will be fetched in json format
+    // Source fields
+    try {
+        document.getElementById("lastSourceAttribution").value = lastSourceAttribution;
+        document.getElementById("firstSourceAttribution").value = firstSourceAttribution;
+        document.getElementById("multiSourceAttribution").value = multiSourceAttribution;
+        console.log("Sources")
+    } catch {
+        console.log('Faltam campos de SourceAttribution no formulário para atribuição do script traktor.js');
+
+    }
+    try {
+        document.getElementById("fbclid").value = fbclid;
+        document.getElementById("gclid").value = gclid;
+        document.getElementById("utm_medium").value = utm_medium;
+        document.getElementById("utm_source").value = utm_source;
+        document.getElementById("utm_campaign").value = utm_campaign;
+        document.getElementById("utm_term").value = utm_term;
+        document.getElementById("utm_content").value = utm_content;
+        document.getElementById("client_user_agent").value = client_user_agent;
+        console.log("Properties")
+
+    } catch {
+        console.log('Faltam campos de atributos no formulário campos para outras infos do script traktor.js');
+    };
+
 };
+
+
+window.addEventListener('DOMContentLoaded', (event) => {
+
+})
