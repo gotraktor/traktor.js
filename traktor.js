@@ -268,7 +268,6 @@ window.onload = function() {
         console.log('Falta campo analyticsClientId do script traktor.js');
     };
 
-    //IP Adress
     fetch('https://ipinfo.io/json', { method: 'GET', mode: 'cors' })
         .then((response) => response.json())
         .then((data) => {
@@ -276,7 +275,6 @@ window.onload = function() {
             document.getElementById("client_ip_address").value = client_ip_address;
         })
 
-    // Source fields
     try {
         document.getElementById("lastSourceAttribution").value = lastSourceAttribution;
         document.getElementById("firstSourceAttribution").value = firstSourceAttribution;
@@ -304,6 +302,6 @@ window.onload = function() {
 };
 
 
-window.addEventListener('DOMContentLoaded', (event) => {
+// window.addEventListener('DOMContentLoaded', (event) => {
 
-})
+// })
