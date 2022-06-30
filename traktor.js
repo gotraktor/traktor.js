@@ -258,6 +258,85 @@ utm_content = readCookie("utmContent");
 client_user_agent = window.navigator.userAgent
 
 
+try {
+    document.getElementById("lastSourceAttribution").value = lastSourceAttribution;
+} catch {
+    console.log('traktor.js - traktor.js - Missing form field: lastSourceAttribution');
+
+};
+try {
+    document.getElementById("firstSourceAttribution").value = firstSourceAttribution;
+} catch {
+    console.log('traktor.js - Missing form field: firstSourceAttribution');
+
+};
+try {
+    document.getElementById("multiSourceAttribution").value = multiSourceAttribution;
+} catch {
+    console.log('traktor.js - Missing form field: multiSourceAttribution');
+
+};
+
+
+try {
+    document.getElementById("client_user_agent").value = client_user_agent;
+} catch {
+    console.log('traktor.js - Missing form field: client_user_agent');
+
+};
+try {
+    document.getElementById("client_ip_address").value = client_ip_address;
+    console.log(client_ip_address);
+} catch {
+    console.log('traktor.js - Missing form field: client_ip_address');
+
+};
+try {
+    document.getElementById("gclid").value = gclid;
+} catch {
+    console.log('traktor.js - Missing form field: gclid');
+
+};
+try {
+    document.getElementById("fbclid").value = fbclid;
+
+} catch {
+    console.log('traktor.js - Missing form field: fbclid');
+
+};
+
+
+try {
+    document.getElementById("utm_content").value = utm_content;
+} catch {
+    console.log('traktor.js - Missing form field: utm_content');
+
+};
+try {
+    document.getElementById("utm_term").value = utm_term;
+} catch {
+    console.log('traktor.js - Missing form field: utm_term');
+
+};
+try {
+    document.getElementById("utm_campaign").value = utm_campaign;
+} catch {
+    console.log('traktor.js - Missing form field: utm_campaign');
+
+};
+try {
+    document.getElementById("utm_source").value = utm_source;
+} catch {
+    console.log('traktor.js - Missing form field: utm_source');
+
+};
+try {
+    document.getElementById("utm_medium").value = utm_medium;
+} catch {
+    console.log('traktor.js - Missing form field: utm_medium');
+
+};
+
 
 window.onload = function() {
     ga("require", "getClientId");
@@ -265,39 +344,16 @@ window.onload = function() {
     try {
         document.getElementById("analyticsClientId").value = formClientID;
     } catch {
-        console.log('Falta campo analyticsClientId do script traktor.js');
+        console.log('traktor.js - Missing form field: analyticsClientId');
     };
 
     fetch('https://ipinfo.io/json', { method: 'GET', mode: 'cors' })
         .then((response) => response.json())
         .then((data) => {
             client_ip_address = data.ip;
-            document.getElementById("client_ip_address").value = client_ip_address;
         })
 
-    try {
-        document.getElementById("lastSourceAttribution").value = lastSourceAttribution;
-        document.getElementById("firstSourceAttribution").value = firstSourceAttribution;
-        document.getElementById("multiSourceAttribution").value = multiSourceAttribution;
-        console.log("Sources")
-    } catch {
-        console.log('Faltam campos de SourceAttribution no formulário para atribuição do script traktor.js');
 
-    }
-    try {
-        document.getElementById("fbclid").value = fbclid;
-        document.getElementById("gclid").value = gclid;
-        document.getElementById("utm_medium").value = utm_medium;
-        document.getElementById("utm_source").value = utm_source;
-        document.getElementById("utm_campaign").value = utm_campaign;
-        document.getElementById("utm_term").value = utm_term;
-        document.getElementById("utm_content").value = utm_content;
-        document.getElementById("client_user_agent").value = client_user_agent;
-        console.log("Properties")
-
-    } catch {
-        console.log('Faltam campos de atributos no formulário campos para outras infos do script traktor.js');
-    };
 
 };
 
