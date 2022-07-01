@@ -286,85 +286,27 @@ function setFields() {
         })
 
 
-    try {
-        document.getElementById("lastSourceAttribution").value = lastSourceAttribution;
-    } catch {
-        console.log('traktor.js - traktor.js - Missing form field: lastSourceAttribution');
+    function getError(name){ 
+        var astr = String(name)
+        try {
+        document.getElementById(astr).value=name; 
+        } catch {
+            console.log('traktor.js - Missing form field:' + astr);
+        }
+    }
 
-    };
-    try {
-        document.getElementById("firstSourceAttribution").value = firstSourceAttribution;
-    } catch {
-        console.log('traktor.js - Missing form field: firstSourceAttribution');
-
-    };
-    try {
-        document.getElementById("multiSourceAttribution").value = multiSourceAttribution;
-    } catch {
-        console.log('traktor.js - Missing form field: multiSourceAttribution');
-
-    };
-
-
-    try {
-        document.getElementById("client_user_agent").value = client_user_agent;
-    } catch {
-        console.log('traktor.js - Missing form field: client_user_agent');
-
-    };
-    try {
-        // console.log(client_ip_address);
-        document.getElementById("client_ip_address").value = String(client_ip_address);
-
-    } catch {
-        console.log('traktor.js - Missing form field: client_ip_address');
-
-    };
-    try {
-        document.getElementById("gclid").value = gclid;
-    } catch {
-        console.log('traktor.js - Missing form field: gclid');
-
-    };
-    try {
-        document.getElementById("fbclid").value = fbclid;
-
-    } catch {
-        console.log('traktor.js - Missing form field: fbclid');
-
-    };
-
-
-    try {
-        document.getElementById("utm_content").value = utm_content;
-    } catch {
-        console.log('traktor.js - Missing form field: utm_content');
-
-    };
-    try {
-        document.getElementById("utm_term").value = utm_term;
-    } catch {
-        console.log('traktor.js - Missing form field: utm_term');
-
-    };
-    try {
-        document.getElementById("utm_campaign").value = utm_campaign;
-    } catch {
-        console.log('traktor.js - Missing form field: utm_campaign');
-
-    };
-    try {
-        document.getElementById("utm_source").value = utm_source;
-    } catch {
-        console.log('traktor.js - Missing form field: utm_source');
-
-    };
-    try {
-        document.getElementById("utm_medium").value = utm_medium;
-    } catch {
-        console.log('traktor.js - Missing form field: utm_medium');
-
-    };
+    getError('lastSourceAttribution');
+    getError('firstSourceAttribution');
+    getError('multiSourceAttribution');
+    getError('client_user_agent');
+    getError('client_ip_address');
+    getError('gclid');
+    getError('fbclid');
+    getError('utm_content');
+    getError('utm_term');
+    getError('utm_campaign');
+    getError('utm_source');
+    getError('utm_medium');
 }
 
 setTimeout(setFields, 3000);
