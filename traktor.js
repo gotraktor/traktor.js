@@ -313,5 +313,4 @@ function setFields() {
     getError('utm_medium');
     getError('_fbp');
 }
-
 setTimeout(() => { setFields(); }, 2000);
