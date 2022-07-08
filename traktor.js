@@ -72,6 +72,8 @@ let utm_term = getQueryParam("utm_term");
 let utm_content = getQueryParam("utm_content");
 let gclid = getQueryParam("gclid");
 let fbclid = getQueryParam("fbclid");
+let _fbp = readCookie("_fbp");
+
 
 if (!utm_medium) {
     utm_medium = "";
@@ -233,7 +235,6 @@ clearCookie("lastSourceAttribution");
 clearCookie("firstSourceAttribution");
 clearCookie("multiSourceAttribution");
 
-
 clearCookie("utmSource");
 clearCookie("utmMedium");
 clearCookie("utmCampaign");
@@ -246,6 +247,9 @@ multiSourceAttribution = readCookie("multiSourceAttribution");
 
 clearCookie("_fbc");
 fbclid = readCookie("_fbc");
+
+// clearCookie("_fbp");
+// fbp = readCookie("_fbp");
 
 clearCookie("gclidStored");
 gclid = readCookie("gclidStored");
@@ -307,6 +311,7 @@ function setFields() {
     getError('utm_campaign');
     getError('utm_source');
     getError('utm_medium');
+    getError('_fbp');
 }
 
 setTimeout(setFields, 3000);
