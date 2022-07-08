@@ -286,10 +286,10 @@ function setFields() {
         })
 
 
-    function getError(name){ 
+    function getError(name) {
         var astr = String(name)
         try {
-        document.getElementById(astr).value=name; 
+            document.getElementById(astr).value = name;
         } catch {
             console.log('traktor.js - Missing form field:' + astr);
         }
@@ -309,4 +309,4 @@ function setFields() {
     getError('utm_medium');
 }
 
-setTimeout(setFields, 3000);
+setTimeout(() => { setFields(); }, 2000);
