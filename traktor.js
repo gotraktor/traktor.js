@@ -234,31 +234,14 @@ if (utm_medium !== null && utm_medium !== "") {
 clearCookie("lastSourceAttribution");
 clearCookie("firstSourceAttribution");
 clearCookie("multiSourceAttribution");
-
 clearCookie("utmSource");
 clearCookie("utmMedium");
 clearCookie("utmCampaign");
 clearCookie("utmTerm");
 clearCookie("utmContent");
-
-lastSourceAttribution = readCookie("lastSourceAttribution");
-firstSourceAttribution = readCookie("firstSourceAttribution");
-multiSourceAttribution = readCookie("multiSourceAttribution");
-
 clearCookie("_fbc");
-fbclid = readCookie("_fbc");
-
-// clearCookie("_fbp");
-// fbp = readCookie("_fbp");
-
 clearCookie("gclidStored");
-gclid = readCookie("gclidStored");
 
-utm_source = readCookie("utmSource");
-utm_medium = readCookie("utmMedium");
-utm_campaign = readCookie("utmCampaign");
-utm_term = readCookie("utmTerm");
-utm_content = readCookie("utmContent");
 client_user_agent = window.navigator.userAgent
 
 
@@ -290,10 +273,10 @@ function setFields() {
         })
 
 
-    function getError(name) {
-        var astr = String(name)
+    function getError(name){ 
+        var astr = new String(name)
         try {
-            document.getElementById(astr).value = name;
+        document.getElementById(astr).value=readCookie(name); 
         } catch {
             console.log('traktor.js - Missing form field:' + astr);
         }
