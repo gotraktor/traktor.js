@@ -243,6 +243,7 @@ clearCookie("_fbc");
 clearCookie("gclidStored");
 
 client_user_agent = window.navigator.userAgent
+setCookie("client_user_agent", client_user_agent, 5184000);
 
 
 window.onload = function() {
@@ -273,10 +274,10 @@ function setFields() {
         })
 
 
-    function getError(name){ 
+    function getError(name) {
         var astr = new String(name)
         try {
-        document.getElementById(astr).value=readCookie(name); 
+            document.getElementById(astr).value = readCookie(name);
         } catch {
             console.log('traktor.js - Missing form field:' + astr);
         }
