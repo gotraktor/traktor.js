@@ -72,7 +72,6 @@ let utm_term = getQueryParam("utm_term");
 let utm_content = getQueryParam("utm_content");
 let gclid = getQueryParam("gclid");
 let fbclid = getQueryParam("fbclid");
-let _fbp = readCookie("_fbp");
 
 
 if (!utm_medium) {
@@ -239,11 +238,24 @@ clearCookie("utmMedium");
 clearCookie("utmCampaign");
 clearCookie("utmTerm");
 clearCookie("utmContent");
-clearCookie("_fbc");
 clearCookie("gclidStored");
+clearCookie("_fbc");
 
+// #### Setfields ####
 client_user_agent = window.navigator.userAgent
-setCookie("client_user_agent", client_user_agent, 5184000);
+    // lastSourceAttribution = readCookie("lastSourceAttribution");
+    // firstSourceAttribution = readCookie("firstSourceAttribution");
+    // multiSourceAttribution = readCookie("multiSourceAttribution");
+    // fbclid = readCookie("_fbc");
+    // fbp = readCookie("_fbp");
+    // gclid = readCookie("gclidStored");
+    // utm_source = readCookie("utmSource");
+    // utm_medium = readCookie("utmMedium");
+    // utm_campaign = readCookie("utmCampaign");
+    // utm_term = readCookie("utmTerm");
+    // utm_content = readCookie("utmContent");
+
+
 
 
 window.onload = function() {
@@ -254,8 +266,29 @@ window.onload = function() {
     } catch {
         console.log('traktor.js - Missing form field: analyticsClientId');
     };
+    try {
+        document.getElementById("client_user_agent").value = client_user_agent;
+    } catch {
+        console.log('traktor.js - Missing form field: client_user_agent');
+    };
 
 };
+
+function getError(name) {
+    var astr = new String(name)
+    if (astr == '_fbc') {
+        astr = 'fbclid'
+    }
+    if (astr == 'gclidStored') {
+        astr = 'gclid'
+    }
+
+    try {
+        document.getElementById(astr).value = readCookie(name);
+    } catch {
+        console.log('traktor.js - Missing form field:' + astr);
+    }
+}
 
 function setFields() {
     fetch('https://ipinfo.io/json', { method: 'GET', mode: 'cors' })
@@ -273,28 +306,17 @@ function setFields() {
             };
         })
 
-
-    function getError(name) {
-        var astr = new String(name)
-        try {
-            document.getElementById(astr).value = readCookie(name);
-        } catch {
-            console.log('traktor.js - Missing form field:' + astr);
-        }
-    }
-
     getError('lastSourceAttribution');
     getError('firstSourceAttribution');
     getError('multiSourceAttribution');
-    getError('client_user_agent');
     getError('client_ip_address');
-    getError('gclid');
-    getError('fbclid');
+    getError('gclidStored');
+    getError('_fbc');
+    getError('_fbp');
     getError('utm_content');
     getError('utm_term');
     getError('utm_campaign');
     getError('utm_source');
     getError('utm_medium');
-    getError('_fbp');
 }
 setTimeout(() => { setFields(); }, 2000);
