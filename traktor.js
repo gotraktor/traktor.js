@@ -230,6 +230,7 @@ if (utm_medium !== null && utm_medium !== "") {
     setCookie("utmMedium", utm_medium, 5184000);
 }
 
+// #### clearCoo ####
 clearCookie("lastSourceAttribution");
 clearCookie("firstSourceAttribution");
 clearCookie("multiSourceAttribution");
@@ -243,20 +244,6 @@ clearCookie("_fbc");
 
 // #### Setfields ####
 client_user_agent = window.navigator.userAgent
-    // lastSourceAttribution = readCookie("lastSourceAttribution");
-    // firstSourceAttribution = readCookie("firstSourceAttribution");
-    // multiSourceAttribution = readCookie("multiSourceAttribution");
-    // fbclid = readCookie("_fbc");
-    // fbp = readCookie("_fbp");
-    // gclid = readCookie("gclidStored");
-    // utm_source = readCookie("utmSource");
-    // utm_medium = readCookie("utmMedium");
-    // utm_campaign = readCookie("utmCampaign");
-    // utm_term = readCookie("utmTerm");
-    // utm_content = readCookie("utmContent");
-
-
-
 
 window.onload = function() {
     ga("require", "getClientId");
