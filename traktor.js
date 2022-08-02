@@ -269,7 +269,21 @@ function getError(name) {
     if (astr == 'gclidStored') {
         astr = 'gclid'
     }
-
+    if (astr == 'utm_content') {
+        astr == 'utmContent'
+    }
+    if (astr == 'utm_term') {
+        astr == 'utmTerm'
+    }
+    if (astr == 'utm_campaign') {
+        astr == 'utmCampaign'
+    }
+    if (astr == 'utm_source') {
+        astr == 'utmSource'
+    }
+    if (astr == 'utm_medium') {
+        astr == 'utmMedium'
+    }
     try {
         document.getElementById(astr).value = readCookie(name);
     } catch {
