@@ -262,32 +262,43 @@ window.onload = function() {
 };
 
 function getError(name) {
-    var astr = new String(name)
-    if (astr == '_fbc') {
-        astr = 'fbclid'
+    if (name == 'fbclid') {
+        astr = '_fbc'
     }
-    if (astr == 'gclidStored') {
-        astr = 'gclid'
+    if (name == 'gclid') {
+        astr = 'gclidStored'
     }
-    if (astr == 'utm_content') {
-        astr == 'utmContent'
+    if (name == '_fbp') {
+        astr = '_fbp'
     }
-    if (astr == 'utm_term') {
-        astr == 'utmTerm'
+    if (name == 'utm_content') {
+        astr = 'utmContent'
     }
-    if (astr == 'utm_campaign') {
-        astr == 'utmCampaign'
+    if (name == 'utm_term') {
+        astr = 'utmTerm'
     }
-    if (astr == 'utm_source') {
-        astr == 'utmSource'
+    if (name == 'utm_campaign') {
+        astr = 'utmCampaign'
     }
-    if (astr == 'utm_medium') {
-        astr == 'utmMedium'
+    if (name == 'utm_source') {
+        astr = 'utmSource'
+    }
+    if (name == 'utm_medium') {
+        astr = 'utmMedium'
+    }
+    if (name == 'lastSourceAttribution') {
+        astr = 'lastSourceAttribution'
+    }
+    if (name == 'firstSourceAttribution') {
+        astr = 'firstSourceAttribution'
+    }
+    if (name == 'multiSourceAttribution') {
+        astr = 'multiSourceAttribution'
     }
     try {
-        document.getElementById(astr).value = readCookie(name);
+        document.getElementById(name).value = readCookie(astr);
     } catch {
-        console.log('traktor.js - Missing form field:' + astr);
+        console.log('traktor.js - Missing form field:' + name);
     }
 }
 
@@ -311,8 +322,8 @@ function setFields() {
     getError('firstSourceAttribution');
     getError('multiSourceAttribution');
     getError('client_ip_address');
-    getError('gclidStored');
-    getError('_fbc');
+    getError('gclid');
+    getError('fbclid');
     getError('_fbp');
     getError('utm_content');
     getError('utm_term');
