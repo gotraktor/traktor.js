@@ -303,7 +303,7 @@ function getError(name) {
 }
 
 function setFields() {
-    fetch('https://ipinfo.io/json', { method: 'GET', mode: 'cors' })
+    fetch('https://api.ipify.org/?format=json', { method: 'GET', mode: 'cors' })
         .then((response) => response.json())
         .then((data) => {
             client_ip_address = data.ip;
