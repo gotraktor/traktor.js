@@ -1,6 +1,6 @@
 let finalSource;
 let referrer = document.referrer;
-let domain = window.location.hostname;
+let domaint = window.location.hostname;
 let EXPIRATE_DATE_COOKIE = 5184000;
 
 function getQueryParam(name) {
@@ -39,7 +39,7 @@ function setCookie(cookieName, cookieValue, expirationTime) {
         "; expires=" +
         date +
         "; path=/; domain=" +
-        domain;
+        domaint;
 }
 
 
