@@ -246,10 +246,10 @@ clearCookie("_fbc");
 client_user_agent = window.navigator.userAgent
 
 window.onload = function() {
-    ga("require", "getClientId");
-    var formClientID = ga.getAll()[0].get("clientId");
+    //ga("require", "getClientId");
+    //var formClientID = ga.getAll()[0].get("clientId");
     try {
-        document.getElementById("analyticsClientId").value = formClientID;
+        document.getElementById("analyticsClientId").value = readCookie('_ga'); //formClientID;
     } catch {
         console.log('traktor.js - Missing form field: analyticsClientId');
     };
@@ -309,7 +309,7 @@ function setFields() {
             client_ip_address = data.ip;
             console.log("IP: " + client_ip_address);
             try {
-                // console.log(client_ip_address);
+                console.log(client_ip_address);
                 document.getElementById("client_ip_address").value = String(client_ip_address);
 
             } catch {
