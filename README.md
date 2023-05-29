@@ -8,6 +8,8 @@ firstSourceAttribution (primeira origem de campanha atribuída ao usuário)
 multiSourceAttribution (todo o caminho percorrido)
 fbclid (id de clique do Facebook Ads)
 gclid (id de clique do Google Ads)
+utmSource (origem da atribuição)
+utmMedium (mídia da atribuição)
 utmCampaign (todo o caminho de campanhas percorrido)
 utmTerm (termos utilizados por busca paga)
 utmContent (conteúdo do anúncio)
@@ -18,7 +20,7 @@ Por fim, essa informação é repassada através de variáveis que possuem o mes
 ### Adicionar o script abaixo em todas as páginas do site:
 
 ```
-<script src="https://gotraktor.com/traktor.js"></script>
+<script src="https://js.gotraktor.com/traktor.js"></script>
 ```
 
 Esse script vai puxar as informações de origem de entrada e armazenará em um cookie.
@@ -33,6 +35,11 @@ Para fazer a chamada pode-se inserir as informações em campos ocultos do formu
 - document.getElementById("multiSourceAttribution").value = multiSourceAttribution;
 - document.getElementById("fbclid").value = fbclid
 - document.getElementById("gclid").value = gclid
-- document.getElementById("utm_campaign").value = utm_campaign
-- document.getElementById("utm_content").value = utm_content
-- document.getElementById("utm_term").value = utm_term
+- document.getElementById("utm_source").value = utmSource
+- document.getElementById("utm_medium").value = utmMedium
+- document.getElementById("utm_campaign").value = utmCampaign
+- document.getElementById("utm_content").value = utmContent
+- document.getElementById("utm_term").value = utmTerm
+- document.getElementById("client_user_agent").value = client_user_agent
+- document.getElementById("client_ip_address").value = client_ip_address
+- document.getElementById("analyticsClientId").value = formClientID
