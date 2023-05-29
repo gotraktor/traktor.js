@@ -258,7 +258,11 @@ window.onload = function() {
     } catch {
         console.log('traktor.js - Missing form field: client_user_agent');
     };
-
+    try {
+        document.getElementById("userId").value = rudderanalytics.getAnonymousId()
+    } catch {
+        console.log('traktor.js - Missing form field: userId');
+    };
 };
 
 function getError(name) {
