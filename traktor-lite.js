@@ -243,13 +243,13 @@ clearCookie("gclidStored");
 clearCookie("_fbc");
 
 // #### Setfields ####
-client_user_agent = window.navigator.userAgent
+/*client_user_agent = window.navigator.userAgent
 
 window.onload = function() {
-    //ga("require", "getClientId");
-    //var formClientID = ga.getAll()[0].get("clientId");
+    ga("require", "getClientId");
+    var formClientID = ga.getAll()[0].get("clientId");
     try {
-        document.getElementById("analyticsClientId").value =readCookie('_ga');//formClientID;
+        document.getElementById("analyticsClientId").value = formClientID;
     } catch {
         console.log('traktor.js - Missing form field: analyticsClientId');
     };
@@ -298,7 +298,7 @@ function getError(name) {
     try {
         document.getElementById(name).value = readCookie(astr);
     } catch {
-        //console.log('traktor.js - Missing form field:' + name);
+        console.log('traktor.js - Missing form field:' + name);
     }
 }
 
@@ -313,7 +313,7 @@ function setFields() {
                 document.getElementById("client_ip_address").value = String(client_ip_address);
 
             } catch {
-                //console.log('traktor.js - Missing form field: client_ip_address');
+                console.log('traktor.js - Missing form field: client_ip_address');
 
             };
         })
@@ -332,3 +332,5 @@ function setFields() {
     getError('utm_medium');
 }
 setTimeout(() => { setFields(); }, 2000);
+*/
+console.log()
