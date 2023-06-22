@@ -242,6 +242,13 @@ clearCookie("utmContent");
 clearCookie("gclidStored");
 clearCookie("_fbc");
 
+fetch('https://api.ipify.org/?format=json', { method: 'GET', mode: 'cors' })
+        .then((response) => response.json())
+        .then((data) => {
+            client_ip_address = data.ip;
+            console.log("IP: " + client_ip_address);
+        })
+
 // #### Setfields ####
 /*client_user_agent = window.navigator.userAgent
 
@@ -303,20 +310,7 @@ function getError(name) {
 }
 
 function setFields() {
-    fetch('https://api.ipify.org/?format=json', { method: 'GET', mode: 'cors' })
-        .then((response) => response.json())
-        .then((data) => {
-            client_ip_address = data.ip;
-            console.log("IP: " + client_ip_address);
-            try {
-                // console.log(client_ip_address);
-                document.getElementById("client_ip_address").value = String(client_ip_address);
-
-            } catch {
-                console.log('traktor.js - Missing form field: client_ip_address');
-
-            };
-        })
+    
 
     getError('lastSourceAttribution');
     getError('firstSourceAttribution');
