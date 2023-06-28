@@ -325,7 +325,6 @@ function setFields() {
     getError('lastSourceAttribution');
     getError('firstSourceAttribution');
     getError('multiSourceAttribution');
-    getError('client_ip_address');
     getError('gclid');
     getError('fbclid');
     getError('_fbp');
