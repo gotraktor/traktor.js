@@ -70,7 +70,7 @@ let utm_medium = getQueryParam("utm_medium");
 let utm_campaign = getQueryParam("utm_campaign");
 let utm_term = getQueryParam("utm_term");
 let utm_content = getQueryParam("utm_content");
-let gclid = getQueryParam("gclid");
+let tk_gclid = getQueryParam("gclid");
 let fbclid = getQueryParam("fbclid");
 
 
@@ -115,13 +115,13 @@ function getReferrerSource(referrer) {
     return source;
 }
 
-function getPaidSource(utm_medium, utm_source, gclid, fbclid) {
+function getPaidSource(utm_medium, utm_source, tk_gclid, fbclid) {
     let source;
     if (utm_medium === "display") {
         return "Google Display";
     }
-    if (gclid !== null) {
-        setCookie("gclidStored", gclid, 5184000);
+    if (tk_gclid !== null) {
+        setCookie("gclidStored", tk_gclid, 5184000);
         return "Google Paid Search";
     }
     if (fbclid !== null) {
@@ -159,7 +159,7 @@ function getPaidSource(utm_medium, utm_source, gclid, fbclid) {
     }
 }
 
-let paidSource = getPaidSource(utm_medium, utm_source, gclid, fbclid);
+let paidSource = getPaidSource(utm_medium, utm_source, tk_gclid, fbclid);
 let referrerSource = getReferrerSource(referrer);
 let emailSource = getEmailSource(utm_medium, utm_source);
 
@@ -249,82 +249,3 @@ fetch('https://api.ipify.org/?format=json', { method: 'GET', mode: 'cors' })
             console.log("IP: " + client_ip_address);
         })
 
-// #### Setfields ####
-/*client_user_agent = window.navigator.userAgent
-
-window.onload = function() {
-    ga("require", "getClientId");
-    var formClientID = ga.getAll()[0].get("clientId");
-    try {
-        document.getElementById("analyticsClientId").value = formClientID;
-    } catch {
-        console.log('traktor.js - Missing form field: analyticsClientId');
-    };
-    try {
-        document.getElementById("client_user_agent").value = client_user_agent;
-    } catch {
-        console.log('traktor.js - Missing form field: client_user_agent');
-    };
-
-};
-
-function getError(name) {
-    if (name == 'fbclid') {
-        astr = '_fbc'
-    }
-    if (name == 'gclid') {
-        astr = 'gclidStored'
-    }
-    if (name == '_fbp') {
-        astr = '_fbp'
-    }
-    if (name == 'utm_content') {
-        astr = 'utmContent'
-    }
-    if (name == 'utm_term') {
-        astr = 'utmTerm'
-    }
-    if (name == 'utm_campaign') {
-        astr = 'utmCampaign'
-    }
-    if (name == 'utm_source') {
-        astr = 'utmSource'
-    }
-    if (name == 'utm_medium') {
-        astr = 'utmMedium'
-    }
-    if (name == 'lastSourceAttribution') {
-        astr = 'lastSourceAttribution'
-    }
-    if (name == 'firstSourceAttribution') {
-        astr = 'firstSourceAttribution'
-    }
-    if (name == 'multiSourceAttribution') {
-        astr = 'multiSourceAttribution'
-    }
-    try {
-        document.getElementById(name).value = readCookie(astr);
-    } catch {
-        console.log('traktor.js - Missing form field:' + name);
-    }
-}
-
-function setFields() {
-    
-
-    getError('lastSourceAttribution');
-    getError('firstSourceAttribution');
-    getError('multiSourceAttribution');
-    getError('client_ip_address');
-    getError('gclid');
-    getError('fbclid');
-    getError('_fbp');
-    getError('utm_content');
-    getError('utm_term');
-    getError('utm_campaign');
-    getError('utm_source');
-    getError('utm_medium');
-}
-setTimeout(() => { setFields(); }, 2000);
-*/
-console.log()
