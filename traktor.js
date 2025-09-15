@@ -197,13 +197,7 @@ if (utm_source !== null && utm_source !== "") {
 }
 
 if (utm_campaign !== null) {
-    campaign = readCookie("utmCampaign");
-
-    if (campaign) {
-        setCookie("utmCampaign", campaign + " | " + utm_campaign, 5184000);
-    } else {
-        setCookie("utmCampaign", utm_campaign, 5184000);
-    }
+    setCookie("utmCampaign", utm_campaign, 5184000);
 }
 
 if (utm_term !== null) {
