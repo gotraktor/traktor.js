@@ -2,10 +2,9 @@ let finalSource;
 let referrer = document.referrer;
 let domaint = window.location.hostname;
 let EXPIRATE_DATE_COOKIE = 5184000;
-let client_ip_address;
 
 function getQueryParam(name) {
-    let results = new RegExp("[\?&]" + name + "=([^&#]*)").exec(
+    let results = new RegExp("[\\?&]" + name + "=([^&#]*)").exec(
         window.location.href
     );
     if (results == null) {
@@ -43,16 +42,23 @@ function setCookie(cookieName, cookieValue, expirationTime) {
         domaint;
 }
 
+
 function clearCookie(cookieName) {
+
     var cookieValue = readCookie(cookieName);
+
     if (cookieValue) {
+
         if (cookieValue.length > 1000) {
-            var paramList = cookieValue.split("|");
-            var firstParam = paramList[0];
-            var lastParam = paramList[paramList.length - 1];
-            setCookie(cookieName, smallCookie, 5184000);
-        }
-    }
+
+            var paramList = cookieValue.split("|")
+            var firstParam = paramList[0]
+            var lastParam = paramList[paramList.length - 1]
+            var smallCookie = firstParam + " | User path too long to be recorded | " + lastParam
+            setCookie(cookieName, smallCookie, 5184000)
+        };
+    };
+
 }
 
 let lastSourceCookie = readCookie("lastSourceAttribution");
@@ -67,6 +73,7 @@ let utm_content = getQueryParam("utm_content");
 let tk_gclid = getQueryParam("gclid");
 let fbclid = getQueryParam("fbclid");
 
+
 if (!utm_medium) {
     utm_medium = "";
 }
@@ -75,6 +82,7 @@ if (!utm_source) {
 }
 
 function getEmailSource(utm_medium, utm_source) {
+    if (utm_medium.includes("mail") || utm_source.includes("mail")) {
         return "Email Marketing";
     }
 }
@@ -84,17 +92,20 @@ function getReferrerSource(referrer) {
 
     if (referrer) {
         if (referrer.includes(window.location.hostname)) {
-            console.log("Self Referral"); // leaving the variable undefined;
+            console.log("Self Referral"); //leaving the variable undefined;
         } else if (referrer.includes("google")) {
             source = "Google Organic Search";
         } else if (referrer.includes("bing")) {
             source = "Microsoft Organic Search";
         } else if (referrer.includes("twitter")) {
             source = "Twitter Organic";
+        } else if (referrer.includes("facebook") || referrer.includes("fb")) {
             source = "Facebook Organic";
         } else if (referrer.includes("linkedin")) {
             source = "Linkedin Organic";
+        } else if (referrer.includes("insta") || referrer.includes("ig")) {
             source = "Instagram Organic";
+        } else if (referrer.includes("whats") || referrer.includes("wa")) {
             source = "WhatsApp";
         } else {
             source = "Referral";
@@ -118,6 +129,10 @@ function getPaidSource(utm_medium, utm_source, tk_gclid, fbclid) {
         return "Facebook Paid Social";
     }
     if (
+        utm_medium.includes("ppc") ||
+        utm_medium.includes("ad") ||
+        utm_medium.includes("cpc") ||
+        utm_medium.includes("paid") ||
         utm_medium.includes("adwords")
     ) {
         switch (utm_source) {
@@ -148,8 +163,10 @@ let paidSource = getPaidSource(utm_medium, utm_source, tk_gclid, fbclid);
 let referrerSource = getReferrerSource(referrer);
 let emailSource = getEmailSource(utm_medium, utm_source);
 
+finalSource = paidSource || emailSource || referrerSource || "Direct";
 
 if (
+    (finalSource === "Direct" && lastDirectCookie === null) ||
     finalSource !== "Direct"
 ) {
     if (finalSource !== "Direct") {
@@ -160,32 +177,37 @@ if (
         setCookie("firstSourceAttribution", finalSource, EXPIRATE_DATE_COOKIE);
     }
 
-    // Sem append: sempre sobrescreve o multiSourceAttribution com o valor atual
-    setCookie("multiSourceAttribution", finalSource, EXPIRATE_DATE_COOKIE);
+    if (multiSourceCookie) {
+        setCookie(
+            "multiSourceAttribution",
+            multiSourceCookie + " | " + finalSource,
+            EXPIRATE_DATE_COOKIE
+        );
+    } else {
+        setCookie("multiSourceAttribution", finalSource, EXPIRATE_DATE_COOKIE);
+    }
 }
 
 if (finalSource === "Direct") {
     setCookie("lastDirectSource", "true", 5184000);
 }
 
-if (utm_source !== null && utm_source !== "") {
+if (utm_source !== null) {
     setCookie("utmSource", utm_source, 5184000);
 }
 if (utm_campaign !== null) {
     setCookie("utmCampaign", utm_campaign, 5184000);
 }
 
-// Sem append: sobrescreve utmTerm
 if (utm_term !== null) {
     setCookie("utmTerm", utm_term, 5184000);
 }
 
-// Sem append: sobrescreve utmContent
 if (utm_content !== null) {
     setCookie("utmContent", utm_content, 5184000);
 }
 
-if (utm_medium !== null && utm_medium !== "") {
+if (utm_medium !== null) {
     setCookie("utmMedium", utm_medium, 5184000);
 }
 
@@ -201,10 +223,9 @@ clearCookie("utmContent");
 clearCookie("gclidStored");
 clearCookie("_fbc");
 
-fetch("https://api.ipify.org/?format=json", { method: "GET", mode: "cors" })
-    .then((response) => response.json())
-    .then((data) => {
-        client_ip_address = data.ip;
-        console.log("IP: " + client_ip_address);
-    });
-
+fetch('https://api.ipify.org/?format=json', { method: 'GET', mode: 'cors' })
+        .then((response) => response.json())
+        .then((data) => {
+            client_ip_address = data.ip;
+            console.log("IP: " + client_ip_address);
+        })
